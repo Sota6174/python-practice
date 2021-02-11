@@ -55,7 +55,7 @@ while(1):
         break
 print("i = ", i)
 
-# リスト
+# [リスト]
 l_list = [0, 2, 4, 6, 8, 10]
 print("l_list: ", l_list)
 print(type(l_list))
@@ -78,12 +78,6 @@ print(l_list)
 print()
 
 # 内包表記
-'''
-l_list = []
-for i in range(5):
-    l_list.append(i*2)
-より高速
-'''
 l_list = [i*2 for i in range(5)]
 print("[i*2 for i in range(5)]: ", l_list)
 print()
@@ -94,3 +88,71 @@ print()
 
 # 処理時間
 # google colaboratory, jupyter notebookはマジックコマンド(%%timeit)が使える
+
+
+def func1():
+    l_list = []
+    for i in range(100):
+        l_list.append(i)
+
+
+def func2():
+    l_list = [i for i in range(100)]
+
+
+processing_time = timeit.timeit(stmt=func1, number=100)
+print(f"processing_time: {processing_time/100:.7f}[sec]\n")
+
+processing_time = timeit.timeit(stmt=func2, number=100)
+print(f"processing_time: {processing_time/100:.7f}[sec]\n")
+
+# (タプル)：変更されたくない値の保管などで有効
+t_tuple = (0, 1, 2)     # リストと違って内容が変更出来ない
+
+t1_tuple = (0, 1)
+t2_tuple = (2, 3)
+print(f"t1_tuple: {t1_tuple}, type: {type(t1_tuple)}, id: {id(t1_tuple)}")
+print(f"t2_tuple: {t2_tuple}, type: {type(t2_tuple)}, id: {id(t2_tuple)}")
+
+t1_tuple = t1_tuple + t2_tuple  # 新しいt1_tupleが作成されるt1_tuple = (0, 1, 2, 3)と同じ
+print(f"t1_tuple: {t1_tuple}, type: {type(t1_tuple)}, id: {id(t1_tuple)}")
+
+# {辞書}
+d_dict = {'a': 1, 'b': 20, 'c': 30}
+print(f"d_dict: {d_dict}, type: {type(d_dict)}")
+d_dict['a'] = 10
+d_dict['d'] = 40
+print(f"d_dict: {d_dict}")
+print(f"d_dict.keys: {d_dict.keys()}")
+print(f"d_dict.values: {d_dict.values()}")
+print(f"d_dict.items: {d_dict.items()}")
+
+for key, value in d_dict.items():
+    print(f"key: {key}, value: {value}")
+
+# 辞書: get()メソッドは値がない時、Noneを返し、keyerrorにならない
+print("\ndict.get()")
+print(f"d_dict.get('a'): {d_dict.get('a')}")
+print(f"d_dict.get('e'): {d_dict.get('e')}")
+print(f"d_dict: {d_dict}")
+
+# 辞書: pop()メソッドは辞書から値を取り出す
+print("\ndict.pop()")
+print(f"d_dict.pop('a'): {d_dict.pop('a')}")
+print(f"d_dict: {d_dict}\n")
+
+# {集合}: 重複は1つに、順序は順番になる
+s_set = {1, 1, 2, 9, 8, 4, 5}
+print(f"s_set: {s_set}, type: {type(s_set)}")
+s_set = {'a', 'a', 'd', 'c', 'b', 'b', 'b'}
+print(f"s_set: {s_set}, type: {type(s_set)}")
+
+a_set = {0, 1, 2, 3, 4, 5, 6}
+b_set = {0, 2, 4, 6, 8}
+print('a_set: ', a_set)
+print('b_set: ', b_set)
+print('差集合(a - b): \t', a_set - b_set)
+print('差集合(b - a): \t', b_set - a_set)
+print('積集合(a かつ b): \t', a_set & b_set)
+print('和集合(a または b): \t', a_set | b_set)
+print('排他的論理和(a ^ b = (a または b) - (a かつ b)): ', a_set ^ b_set)
