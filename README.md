@@ -19,6 +19,7 @@ pythonで1日1つ何かしら作成していく
 - OS : Windows 10
 - pythonバージョン : Python 3.9.1
 - linter : flake8(pep8に準拠したコードを作成する)
+- エディタ：VScode
 
 # License
 まだ、勉強中
