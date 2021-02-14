@@ -14,4 +14,4 @@
 
 # モジュールのインポート
 
-- pip install termcolor
+- repuirements.txtに記載
