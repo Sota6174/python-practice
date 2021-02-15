@@ -4,7 +4,7 @@ from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 # todo.dbという名前のデータベースを設定
-app.config['SQLALCHEMY_DATABASE_URL'] = 'sqlite:///todo.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///todo.db'
 # データベースを作成
 db = SQLAlchemy(app)
 
