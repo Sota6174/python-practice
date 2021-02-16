@@ -49,7 +49,20 @@
 4. [Procfile](https://devcenter.heroku.com/ja/articles/getting-started-with-python#procfile)を作成し、中に"web: gunicorn app:app --log-file=-"を記載
   - ```> touch ./Procfile```
   - ```> echo "web: gunicorn app:app --log-file=-" > ./Procfile```
-5. 
+5. gitリポジトリを作成
+  - ```> git init```
+  - ```> git add .```
+  - ```> git commit -m "コミットメッセージ"```
+6. Herokuにログイン
+  - ```> heroku login```
+  - Herokuのログインページに飛ぶため、そこでログインする
+7. アプリを作成
+  - ```> heroku create アプリ名```
+  - アプリ名の部分は、そのままURLに使われるため、他のアプリと重複していると、その名前は使えない(=ユニークな名前にする必要がある)
+8. アプリを公開する
+  - ```> git push heroku master```
+9. アプリのURL(https://アプリ名.herokuapp.com/)にアクセスする
+
 
 # 参考動画
 
