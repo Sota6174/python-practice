@@ -139,3 +139,9 @@ cython_debug/
 
 # ignore exe files
 *.exe
+
+# ignore statics folder
+static
+
+# ignore *-venv folder
+*-venv
