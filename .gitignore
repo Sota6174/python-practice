@@ -145,3 +145,6 @@ static
 
 # ignore *-venv folder
 *-venv
+
+# ignore csv file
+*.csv
