@@ -24,10 +24,10 @@
 ### 日本語の文字化け(豆腐バグ)
 
 - グラフで日本語を表示しようとすると、文字化けし、▯▯▯▯▯▯▯のように表示される
-- GoogleColaboratoryで日本語を表示することは諦めた
-- 以下はVScodeでの豆腐回避手順
+- 以下は豆腐回避手順
+
 1. japanize-matplotlibモジュールをインストールする
-```
-> pip install japanize-matplotlib
-```
+- VScode: ```> pip install japanize-matplotlib```
+- Google Colabotatory: ```!pip install japanize-matplotlib```
+
 2. コード内で```import japanize_matplotlib```と記載する
