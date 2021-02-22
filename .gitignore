@@ -146,6 +146,6 @@ static
 # ignore *-venv folder
 *-venv
 
-# ignore csv file and xlsx file
-*.csv
-*.xlsx
+# ignore csv file and Excel file
+*_private.csv
+*_private.xlsx
