@@ -2,7 +2,6 @@ import pandas as pd
 import matplotlib.pyplot as plt
 import japanize_matplotlib
 
-
 df_japan_data = pd.read_csv('data/japan_shiftjis.csv', encoding='shift-jis')
 print(df_japan_data.head(10))
 

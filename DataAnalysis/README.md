@@ -31,3 +31,17 @@
 - Google Colabotatory: ```!pip install japanize-matplotlib```
 
 2. コード内で```import japanize_matplotlib```と記載する
+
+### データフレームを表示するとき
+
+- Jupyter Notebook, Google Colabotatoryでデータフレームを表示するときはprint(df)ではなく、display(df)で表示すると、綺麗に表示される
+- VScodeのターミナル上ではdisplay(df)もprint(df)も同じ(列が揃っていない)表示になってしまう
+- listやdictはpprint(list, dict)
+
+### inplaceについて
+
+- inplaceは指定し忘れが怖いため、データを書き換えたあとはinplace=Trueで上書きするのではなく、元のデータフレームに代入することで上書きする
+
+# 大量のデータを扱う場合
+
+- sqlite3モジュールをimportして大量のデータをリレーショナルデータベース(RDB)として扱うことも視野に入れる

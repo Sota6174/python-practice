@@ -2,7 +2,6 @@
 import pandas as pd
 pd.set_option('display.max_rows', 5)
 
-
 df = pd.read_csv('data/japan_shiftjis.csv', encoding='shift-jis')
 print(df)
 print()
