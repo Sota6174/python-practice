@@ -39,3 +39,12 @@
 
 - A, B, C -> 0, 1, 2 (ラベルエンコーディング)
 - True(Yes), False(No) -> 1, 0 (ワンホットエンコーディング)
+
+### データの可視化
+
+- [train.csv](https://www.kaggle.com/c/titanic/data?select=train.csv)の各項目のデータはサイト上のDetailで可視化されている
+
+### kaggle apiもある
+
+- [githubリンク]https://github.com/Kaggle/kaggle-api)
+- [ドキュメント]https://www.kaggle.com/docs/api)
