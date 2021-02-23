@@ -10,7 +10,6 @@
 
 - [Issueのリンク](https://github.com/Sota6174/python-practice/issues/6#issue-807942767)
 
-
 # 参考動画
 
 - [キノコード / プログラミング学習チャンネル](https://www.youtube.com/c/kinocode/featured)さんの動画
@@ -42,6 +41,6 @@
 
 - inplaceは指定し忘れが怖いため、データを書き換えたあとはinplace=Trueで上書きするのではなく、元のデータフレームに代入することで上書きする
 
-# 大量のデータを扱う場合
+### 大量のデータを扱う場合
 
 - sqlite3モジュールをimportして大量のデータをリレーショナルデータベース(RDB)として扱うことも視野に入れる

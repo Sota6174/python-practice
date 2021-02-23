@@ -1,0 +1,14 @@
+データ項目
+
+'PassengerId'   : 乗客のID（ユニーク）
+'Survived'      : 生存フラグ（0->死亡, 1->生存）（train_dataのみ）
+'Pclass'        : チケットのクラス（1, 2, 3で１が１番良いクラス）
+'Name'          : 乗客の名前
+'Sex'           : 性別（male->男性, female->女性）
+'Age'           : 乗客の年齢
+'SibSp'         : 同乗している兄弟・配偶者の数
+'Parch'         : 同乗している親・子供の数
+'Ticket'        : チケット番号
+'Fare'          : 料金
+'Cabin'         : 客室番号
+'Embarked'      : タイタニック号に乗った港
