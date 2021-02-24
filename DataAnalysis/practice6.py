@@ -112,7 +112,7 @@ plt.show()
 
 
 # seaborn
-# pprint(sns.get_dataset_names())
+pprint(sns.get_dataset_names())
 '''
 ['anagrams',
  'anscombe',
@@ -135,5 +135,7 @@ plt.show()
 '''
 # data = sns.load_dataset('titanic')
 # print(data)
-sns.countplot('Survived', data=train_df)
+bar_graph = sns.countplot(x='Survived', data=train_df)
+bar_graph.set_xticklabels(['生存者数', '死亡者数'])
+bar_graph.get_figure().savefig('images/survived_sns_bar.png')
 plt.show()
