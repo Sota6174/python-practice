@@ -4,6 +4,14 @@ import matplotlib.pyplot as plt
 import japanize_matplotlib
 import seaborn as sns
 from pprint import pprint
+import pathlib
+
+# 中間ディレクトリ(images)ごと作成
+path_dir = pathlib.Path('images/survived')  # pathオブジェクト作成
+path_dir.mkdir(parents=True, exist_ok=True)    # 中間ディレクトリ作成
+print("\n'images/survived'ディレクトリ: ", path_dir.exists())
+
+BASE_PATH = 'images/survived/'
 
 pd.set_option('display.max_columns', None)
 
@@ -29,7 +37,7 @@ survived_series.plot(
     startangle=90,
     counterclock=False
 )
-plt.savefig('images/survived_pd_pie.png')
+plt.savefig(BASE_PATH + 'survived_pd_pie.png')
 plt.show()
 
 survived_series.plot(
@@ -37,7 +45,7 @@ survived_series.plot(
     title='生存人数と死亡人数',
     rot=0
 )
-plt.savefig('images/survived_pd_bar.png')
+plt.savefig(BASE_PATH + 'survived_pd_bar.png')
 plt.show()
 
 
@@ -55,7 +63,7 @@ plt.pie(
     autopct='%1.1f%%',
     explode=[0.1, 0]
 )
-plt.savefig('images/survived_plt_pie.png')
+plt.savefig(BASE_PATH + 'survived_plt_pie.png')
 plt.show()
 
 plt.title('生存人数と死亡人数')
@@ -65,7 +73,7 @@ plt.bar(
     align='center'
 )
 plt.ylabel('人数（人）')
-plt.savefig('images/survived_plt_bar.png')
+plt.savefig(BASE_PATH + 'survived_plt_bar.png')
 plt.show()
 
 plt.title('生存者割合')
@@ -78,7 +86,7 @@ plt.pie(
     autopct='%1.1f%%',
     explode=[0.1, 0]
 )
-plt.savefig('images/survived_plt_pie.png')
+plt.savefig(BASE_PATH + 'survived_plt_pie.png')
 plt.show()
 
 # ２つのグラフを横に並べて表示(辞書不使用)
@@ -107,12 +115,12 @@ plt.pie(
 
 plt.suptitle('Survived', fontsize=16)
 plt.subplots_adjust(top=0.8)
-plt.savefig('images/survived_plt.png')
+plt.savefig(BASE_PATH + 'survived_plt.png')
 plt.show()
 
 
 # seaborn
-# pprint(sns.get_dataset_names())
+pprint(sns.get_dataset_names())
 '''
 ['anagrams',
  'anscombe',
@@ -135,5 +143,7 @@ plt.show()
 '''
 # data = sns.load_dataset('titanic')
 # print(data)
-sns.countplot('Survived', data=train_df)
+bar_graph = sns.countplot(x='Survived', data=train_df)
+bar_graph.set_xticklabels(['生存者数', '死亡者数'])
+bar_graph.get_figure().savefig(BASE_PATH + 'survived_sns_bar.png')
 plt.show()
