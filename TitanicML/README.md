@@ -11,18 +11,13 @@
 
 1. データサイエンスの流れを実際にコードを書きながら勉強する
 2. 動画で扱っていないデータ項目についても、pandas・matplotlib・seabornの練習も兼ねて、可視化する
-3. 可視化したデータから、仮説を立てる(isuueを立てて記載していく)
-4. 自分なりの学習モデルを作成し、検証する
+3. いろいろなサイト・動画を見て、学習モデルの作成にどんなことをしなければいけないのか、データからどのように特徴を見つけ出すのか、考え方・基準を学びながら、自分の環境でコードを書いてみる
 
 # 環境
 
-- 学習手順の１～３はGoogleColaboratoryを使用する
-- 学習手順４はローカル環境かGoogleColaboratoryか考え中
-
-# 参考動画
-
-- [はやたす / Pythonエンジニア](https://www.youtube.com/watch?v=F3D75T_wW4w&list=PL4Y-mUWLK2t0Vy2sUIXK3ItMX0s7CvoB_)さんの動画
-- [キノコード / プログラミング学習チャンネル](https://www.youtube.com/c/kinocode/featured)さんの動画
+- VScode上で[仮想環境を構築](https://github.com/Sota6174/python-practice/issues/6#issue-807942767)する
+- 使用した外部ライブラリはRequirements.txtに記載する
+- 学習モデルの作成に必要だと感じたデータの可視化はtest.pyで行い、提出するcsvファイルの作成はcreate_csv.pyファイルで行う
 
 # メモ
 
@@ -44,7 +39,7 @@
 
 - [train.csv](https://www.kaggle.com/c/titanic/data?select=train.csv)の各項目のデータはサイト上のDetailで可視化されている
 
-### kaggle apiもある
+### kaggle api
 
 - [githubリンク]https://github.com/Kaggle/kaggle-api)
 - [ドキュメント]https://www.kaggle.com/docs/api)
