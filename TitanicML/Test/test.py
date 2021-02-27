@@ -5,8 +5,8 @@ import seaborn as sns
 import pathlib
 
 # imagesディレクトリ作成
-path_dir = pathlib.Path('images')  # pathオブジェクト作成
-path_dir.mkdir(parents=True, exist_ok=True)    # ディレクトリ作成
+path_dir = pathlib.Path('images')   # pathオブジェクト作成
+path_dir.mkdir(exist_ok=True)       # ディレクトリ作成
 
 # データの読み込み
 BASE_PATH = '../titanic_data/'
@@ -56,6 +56,7 @@ print(data_sex)
 # データの可視化(グラフ)
 # Seabornのデフォルトスタイルを設定(fontを設定しないと文字化けする)
 sns.set(font='IPAexGothic')
+
 # 男女の人数
 plt.title('男女の人数')
 sns.countplot(x='Sex', data=train_df)
