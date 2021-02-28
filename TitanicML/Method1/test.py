@@ -79,14 +79,10 @@ plt.show()
 age_df = train_df.dropna(subset=['Age'])
 # print(age_df.shape)
 # (714, 12) : 714 = 891 - 177
-# 年齢の人数に関するグラフを２つ横に並べて表示
-plt.figure(figsize=(10, 4))
 
 # 年齢ごとの人数
-plt.subplot(121)
-plt.title('年齢ごとの人数')
 # ヒストグラムを作成するときにdistplot()を使うと非推奨を言われる
-sns.histplot(age_df['Age'])
+sns.displot(data=age_df, x='Age')
 plt.xlabel('年齢')
 plt.ylabel('人数')
 # print(plt.xticks())
@@ -101,20 +97,4 @@ plt.ylabel('人数')
     Text(90.0, 0, '90')]
 )
 '''
-# plt.xticks([0, 1], ['男性', '女性'])
-
-# # 男女ごとの生存率
-# plt.subplot(122)
-# plt.title('男女ごとの生存率')
-# # ci=Noneで信頼区間を表すエラーバーを非表示にする
-# sns.barplot(x='Sex', y='Survived', ci=None, data=train_df)
-# plt.xlabel('性別')
-# plt.ylabel('生存率')
-# plt.xticks([0, 1], ['男性', '女性'])
-
-# # グラフ全体の設定
-# plt.suptitle('男女の人数に関するグラフ')
-# # グラフの上に0.2、グラフの間に0.3のスペースを空ける
-# plt.subplots_adjust(top=0.8, wspace=0.3)
-# plt.savefig('images/sex.png')
 plt.show()
