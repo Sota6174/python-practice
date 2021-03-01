@@ -3,11 +3,8 @@ import matplotlib.pyplot as plt
 import japanize_matplotlib
 import seaborn as sns
 import pathlib
-from sklearn.preprocessing import LabelEncoder, OneHotEncoder
-
-# imagesディレクトリ作成
-path_dir = pathlib.Path('images')
-path_dir.mkdir(exist_ok=True)
+# from sklearn.preprocessing import LabelEncoder, OneHotEncoder
+from sklearn import tree
 
 # データの読み込み
 BASE_PATH = '../titanic_data/'
@@ -51,7 +48,7 @@ Age    0
 dtype: int64
 '''
 
-# 港の欠損値を補完する（今回は一番多く人が乗り込んできたS(Southampton ship)で補完する）
+# 港の欠損値を補完する（今回は一番多く人が乗り込んできた'S'(Southampton ship)で補完する）
 df['Embarked'] = df['Embarked'].fillna('S')
 # print(df[['Embarked']].isnull().sum())
 '''
@@ -132,5 +129,70 @@ train_df.shape: (891, 8), test_df.shape: (418, 8)
 # test_dfの'Survived'カラムを削除
 test_df = test_df.drop(columns=['Survived'])
 # print(test_df)
+'''
+      PassengerId  Pclass  Sex   Age  Embarked_C  Embarked_Q  Embarked_S
+891           892       3    1  34.5           0           1           0
+892           893       3    0  47.0           0           0           1
+893           894       2    1  62.0           0           1           0
+894           895       3    1  27.0           0           0           1
+895           896       3    0  22.0           0           0           1
+...           ...     ...  ...   ...         ...         ...         ...
+1304         1305       3    1  28.0           0           0           1
+1305         1306       1    0  39.0           1           0           0
+1306         1307       3    1  38.5           0           0           1
+1307         1308       3    1  28.0           0           0           1
+1308         1309       3    1  28.0           1           0           0
+
+[418 rows x 7 columns]
+'''
 
 # train_dfのデータから学習する
+# 今回はDecisionTreeClassifierで決定木モデルを作成する
+y_train = train_df['Survived']                  # 小文字の'y' -> 値がベクトル
+X_train = train_df.drop(columns=['Survived'])   # 大文字の'X' -> 値が行列
+
+tree_clf = tree.DecisionTreeClassifier().fit(X_train, y_train)
+
+# 作成したモデルを使ってtest_dfの'Survived'の値を予測する
+y_prediction = tree_clf.predict(test_df)
+# print(y_prediction)
+'''
+[0. 0. 0. 1. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1. 1. 0. 1. 0. 0. 1. 1. 1. 1.
+ 1. 0. 1. 1. 0. 0. 0. 0. 1. 0. 1. 1. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0. 1. 1.
+ 1. 1. 0. 0. 1. 1. 0. 0. 0. 0. 0. 1. 0. 1. 0. 1. 1. 1. 0. 1. 1. 1. 1. 0.
+ 0. 1. 1. 1. 0. 1. 0. 1. 1. 1. 1. 0. 1. 0. 1. 0. 1. 1. 0. 0. 1. 0. 1. 0.
+ 1. 0. 0. 0. 1. 0. 1. 0. 1. 0. 0. 1. 0. 0. 0. 1. 1. 0. 1. 1. 0. 0. 1. 1.
+ 1. 1. 1. 0. 1. 0. 0. 1. 0. 0. 1. 1. 0. 0. 0. 0. 0. 0. 0. 0. 0. 1. 1. 0.
+ 0. 1. 0. 0. 0. 0. 1. 0. 0. 1. 1. 0. 1. 0. 0. 0. 1. 0. 1. 0. 0. 0. 1. 0.
+ 1. 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 1. 0. 1. 1. 1. 1. 0. 1. 0. 0. 0. 0. 0.
+ 0. 0. 1. 0. 1. 0. 0. 0. 1. 1. 1. 1. 0. 1. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0.
+ 1. 1. 1. 0. 1. 0. 1. 0. 1. 1. 0. 1. 0. 0. 0. 1. 0. 1. 1. 0. 1. 1. 1. 1.
+ 1. 0. 1. 0. 0. 0. 1. 0. 1. 1. 1. 0. 1. 0. 0. 0. 1. 0. 1. 0. 0. 0. 1. 0.
+ 0. 0. 0. 0. 0. 0. 1. 1. 1. 1. 0. 1. 0. 0. 0. 0. 0. 1. 1. 1. 0. 0. 0. 0.
+ 0. 0. 0. 0. 0. 1. 0. 0. 1. 0. 0. 0. 1. 0. 0. 0. 1. 1. 0. 1. 1. 0. 0. 1.
+ 0. 0. 1. 0. 1. 0. 1. 0. 0. 0. 0. 0. 1. 0. 1. 1. 0. 0. 0. 1. 0. 0. 1. 0.
+ 1. 0. 0. 0. 0. 1. 0. 1. 0. 0. 0. 0. 0. 1. 1. 0. 0. 0. 0. 1. 1. 0. 1. 0.
+ 0. 1. 1. 1. 0. 0. 0. 0. 1. 0. 0. 1. 1. 0. 1. 1. 0. 0. 1. 1. 1. 0. 0. 0.
+ 0. 1. 0. 0. 0. 1. 0. 1. 1. 0. 0. 1. 0. 1. 0. 0. 1. 0. 1. 0. 1. 1. 0. 1.
+ 1. 0. 1. 1. 0. 0. 1. 0. 0. 0.]
+'''
+# print(len(test_df), len(y_prediction))
+'''
+418 418
+'''
+
+# 予測結果をtest_dfに反映
+test_df['Survived'] = y_prediction
+# print(test_df)
+
+# 提出用のcsvファイルにデータフレームのデータを書き込む
+submission_df = test_df[['PassengerId', 'Survived']].astype(int)
+# Seriesの型確認はdtype, DataFrameの型確認はdtypes
+print(submission_df.dtypes)
+'''
+PassengerId    int32
+Survived       int32
+dtype: object
+'''
+# 'test.csv'にindexを消して書き込む
+submission_df.to_csv('method1.csv', index=False)
