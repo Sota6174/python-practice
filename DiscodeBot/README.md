@@ -16,3 +16,10 @@
 
 ### test2.py
 - [qiitaの記事](https://qiita.com/1ntegrale9/items/9d570ef8175cf178468f)から引用
+
+
+### discode.pyのインストールで詰まった話
+- [issueのリンク](https://github.com/Sota6174/python-practice/issues/30#issue-821177113)
+
+### pythonの非同期処理の実装
+- [issueのリンク](https://github.com/Sota6174/python-practice/issues/30#issuecomment-790725645)
