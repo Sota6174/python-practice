@@ -1,9 +1,9 @@
 from discord.ext import commands
 
-from japanese import JapaneseHelpCommand
-from constants import TOKEN
+# from japanese import JapaneseHelpCommand
+# from constants import TOKEN
 
-PREFIX = '$'
+# PREFIX = '$'
 BIRTHDAY_dict = {
     'コハル': '2月23日',
     'フィリア': '3月31日',
@@ -20,33 +20,39 @@ BIRTHDAY_dict = {
     'ストレア': '11月6日',
 }
 
-bot = commands.Bot(
-        command_prefix=PREFIX,
-        help_command=JapaneseHelpCommand(prefix=PREFIX))
+# bot = commands.Bot(
+#         command_prefix=PREFIX,
+#         help_command=JapaneseHelpCommand(prefix=PREFIX))
 
 
-@bot.command(name='birthday')
-async def birth(ctx, character_name='all'):
-    """キャラの誕生日を表示する
+class Birthday(commands.Cog):
+    def __init__(self, bot):
+        super().__init__()
+        self.bot = bot
 
-    Args:
-    character_name (str): キャラ名（デフォルト: 'all'）
+    @commands.command(name='birthday')
+    async def birth(self, ctx, character_name='all'):
+        """キャラの誕生日を表示する
 
-    Example:
-    <prefix>birthday <character_name>: $birthday
-    <prefix>birthday <character_name>: $birthday コハル
-    """
-    if character_name == 'all':
-        msg = "```<キャラ名:   誕生日>\n"
-        for key, value in BIRTHDAY_dict.items():
-            msg += f"{key}:     {value}\n"
-        await ctx.send(msg + "```")
-    elif character_name in BIRTHDAY_dict:
-        await ctx.send(f"```{BIRTHDAY_dict[character_name]}```")
-    else:
-        await ctx.send(character_name + 'は未登録です\n')
+        Args:
+        character_name (str): キャラ名（デフォルト: 'all'）
+
+        Example:
+        <prefix>birthday <character_name>: $birthday
+        <prefix>birthday <character_name>: $birthday コハル
+        """
+        if character_name == 'all':
+            msg = "```<キャラ名:   誕生日>\n"
+            for key, value in BIRTHDAY_dict.items():
+                msg += f"{key}:     {value}\n"
+            await ctx.send(msg + "```")
+        elif character_name in BIRTHDAY_dict:
+            await ctx.send(f"```{BIRTHDAY_dict[character_name]}```")
+        else:
+            await ctx.send(character_name + 'は未登録です\n')
 
 
 # Botの起動とDiscordサーバーへの接続（このファイルが実行されたとき）
-if __name__ == '__main__':
-    bot.run(TOKEN)
+# if __name__ == '__main__':
+#     bot.add_cog(Birthday(bot=bot))
+#     bot.run(TOKEN)

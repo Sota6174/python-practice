@@ -18,7 +18,7 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
         self.command_attrs["help"] = "コマンド一覧と簡単な説明を表示する"
 
     def get_ending_note(self):
-        return (f"コマンドの説明を個別に取得したい場合:\n"
+        return (f"コマンド説明の詳細を個別に取得したい場合:\n"
                 f"各コマンドの説明: {self.PREFIX}help <コマンド名>\n"
                 f"各カテゴリの説明: {self.PREFIX}help <カテゴリ名>\n")
 
@@ -26,5 +26,5 @@ class JapaneseHelpCommand(commands.DefaultHelpCommand):
 # if __name__ == '__main__':
 #     bot = commands.Bot(
 #         command_prefix=PREFIX,
-#         help_command=JapaneseHelpCommand())
+#         help_command=JapaneseHelpCommand(prefix=PREFIX))
 #     bot.run(TOKEN)
