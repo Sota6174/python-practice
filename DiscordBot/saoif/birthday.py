@@ -26,6 +26,12 @@ BIRTHDAY_dict = {
 
 
 class Birthday(commands.Cog):
+    """キャラの誕生日を表示するbirthdayコマンドを実装するクラス
+
+    Args:
+        commands (module): module discord.ext.commands
+        commands.Cog (class): The base class that all cogs must inherit from
+    """
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
@@ -35,6 +41,7 @@ class Birthday(commands.Cog):
         """キャラの誕生日を表示する
 
         Args:
+        ctx (context.Context): discord.ext.commands.context.Context object
         character_name (str): キャラ名（デフォルト: 'all'）
 
         Example:

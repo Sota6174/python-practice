@@ -1,4 +1,4 @@
-# DiscodeBot/pracitce
+# DiscordBot/pracitce
 
 - Discode内で使えるBotを作ってみる
 
@@ -12,7 +12,7 @@
 # メモ
 
 ### test.py
-- [discode.pyの公式ドキュメント](https://discordpy.readthedocs.io/en/stable/quickstart.html)のクイックスタートから引用
+- [discord.pyの公式ドキュメント](https://discordpy.readthedocs.io/en/stable/quickstart.html)のクイックスタートから引用
 
 ### test2.py
 - [qiitaの記事](https://qiita.com/1ntegrale9/items/9d570ef8175cf178468f)から引用
