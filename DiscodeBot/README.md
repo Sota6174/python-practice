@@ -24,6 +24,7 @@
 - プレフィックスなどの細かい設定はcommands.DefaultHelpCommandで定義されているデフォルト値を変更して行う
 - commands.DefaultHelpCommandの値はcommands.Bot()でクラスを初期化した時に設定される
 - commands.Bot()クラスを先に定義して、その後にイベントハンドラを@bot.command()デコレータで定義すると、そのbotクラスのイベントハンドラとして自動で追加していってくれる
+- クラス内でイベントハンドラを定義しないと、helpコマンドの説明を表示した時に、自作したイベントハンドラが全てNo Category:で表示されてしまう
 - [参考](https://cod-sushi.com/discord-py-help-command-japanese/)
 - [discord.ext.commandsの公式ドキュメント](https://discordpy.readthedocs.io/en/stable/ext/commands/commands.html)
 
