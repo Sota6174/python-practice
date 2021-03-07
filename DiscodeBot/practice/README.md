@@ -1,4 +1,4 @@
-# DiscodeBot
+# DiscodeBot/pracitce
 
 - Discode内で使えるBotを作ってみる
 
@@ -29,8 +29,5 @@
 - [discord.ext.commandsの公式ドキュメント](https://discordpy.readthedocs.io/en/stable/ext/commands/commands.html)
 
 
-### discode.pyのインストールで詰まった話
-- [issueのリンク](https://github.com/Sota6174/python-practice/issues/30#issue-821177113)
-
-### pythonの非同期処理の実装
-- [issueのリンク](https://github.com/Sota6174/python-practice/issues/30#issuecomment-790725645)
+### Discode Bot作業記録
+- [Issueのリンク](https://github.com/Sota6174/python-practice/issues/30)
