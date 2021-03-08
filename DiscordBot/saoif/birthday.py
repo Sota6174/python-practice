@@ -29,8 +29,12 @@ class Birthday(commands.Cog):
     """キャラの誕生日を表示するbirthdayコマンドを実装するクラス
 
     Args:
-        commands (module): module discord.ext.commands
-        commands.Cog (class): The base class that all cogs must inherit from
+        bot(class): commands.Bot()
+
+    Memo:
+        commands (module): discord.ext.commandsのモジュール
+        commands.Cog (class): すべての歯車が継承する必要のある基本クラス
+        カテゴリを追加する際はcommands.Cogクラスの継承が必須
     """
     def __init__(self, bot):
         super().__init__()
@@ -40,13 +44,15 @@ class Birthday(commands.Cog):
     async def birth(self, ctx, character_name='all'):
         """キャラの誕生日を表示する
 
-        Args:
-        ctx (context.Context): discord.ext.commands.context.Context object
-        character_name (str): キャラ名（デフォルト: 'all'）
+        Args: 引数self, ctxは指定しない
+            character_name (str): キャラ名（デフォルト: 'all'）
 
         Example:
-        <prefix>birthday <character_name>: $birthday
-        <prefix>birthday <character_name>: $birthday コハル
+            <prefix>birthday <character_name>: $birthday
+            <prefix>birthday <character_name>: $birthday コハル
+
+        Memo:
+            ctx (object): discord.ext.commands.context.Context object
         """
         if character_name == 'all':
             msg = "```<キャラ名:   誕生日>\n"

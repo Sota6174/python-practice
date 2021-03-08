@@ -25,9 +25,13 @@
 - commands.DefaultHelpCommandの値はcommands.Bot()でクラスを初期化した時に設定される
 - commands.Bot()クラスを先に定義して、その後にイベントハンドラを@bot.command()デコレータで定義すると、そのbotクラスのイベントハンドラとして自動で追加していってくれる
 - クラス内でイベントハンドラを定義しないと、helpコマンドの説明を表示した時に、自作したイベントハンドラが全てNo Category:で表示されてしまう
+- bot = commands.Bot()でインスタンスを初期化する際にself_botはデフォルトでFalseが指定されていて、bot自身を無視する
 - [参考](https://cod-sushi.com/discord-py-help-command-japanese/)
 - [discord.ext.commandsの公式ドキュメント](https://discordpy.readthedocs.io/en/stable/ext/commands/commands.html)
 
+### test4.py
+- unicodedataを用いて、半角数字をkey、全角数字をvalueに持つ辞書を作成し、translate()メソッドを使用することで半角数字を全角数字に変換出来る
+- 参考：http://eneprog.blogspot.com/2018/09/pythonunicodedata.html
 
 ### Discode Bot作業記録
 - [Issueのリンク](https://github.com/Sota6174/python-practice/issues/30)
