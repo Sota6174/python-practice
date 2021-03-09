@@ -12,7 +12,7 @@ AREA_LIST = [
     '掲示板', '黒鉄宮']
 TODO_LIST = ['熟練', 'ボス周回', 'ナンパ（ギルド勧誘）', '瓶集め', 'ポテチ食べる', '寝る！']
 TASK_LIST = [
-    '小瓶', '中瓶', 'mod開放の欠片Ⅱ・SS', '赤冥晶の欠片', '橙冥晶の欠片', 
+    '小瓶', '中瓶', 'mod開放の欠片Ⅱ・SS', '赤冥晶の欠片', '橙冥晶の欠片',
     '大瓶', 'mod開放の欠片Ⅲ', '黄冥晶の欠片', '緑冥晶の欠片',
     '武装石', 'コアメタル', '混沌の赤冥晶', '混沌の橙冥晶', '混沌の黄冥晶', '混沌の緑冥晶', '熟練度']
 WEAPON_LIST = ['片手直剣', '片手細剣', '片手棍', '短剣', '両手斧', '両手槍', '弓', '盾']
@@ -35,7 +35,7 @@ def set_task(quantity):
     else:
         task = random.choice(TASK_LIST)
 
-    quantity = str(quantity).translate(NUMBER_TO_FULLWIDTH)
+    quantity = AREA_LIST[quantity-1]
     if task == 'mod開放の欠片Ⅲ':
         quota = f"{task}・{random.choice(WEAPON_LIST[:-1])}を{quantity}個ドロップ"
     elif task == '熟練':
@@ -52,7 +52,7 @@ def set_task(quantity):
 
 
 class ToDo(commands.Cog):
-    """何する？コマンド・寝れま１０！コマンドを実装するクラス
+    """何する？・寝れま１０！・ギルイベコマンドを実装するクラス
 
     Args:
         bot(class): commands.Bot()
@@ -73,7 +73,7 @@ class ToDo(commands.Cog):
         Args: 引数self, ctxは指定しない
             floor (str): 階層or掲示板（デフォルト: None）
 
-        Example: 空白・数字は全角でもOK！
+        Example: 空白・数字は全角でも半角でもOK！
             <prefix>何する？ <floor>: $何する？
             <prefix>何する？ <floor>: $何する？ 40
             <prefix>何する？　<floor>: $何する？　４０
@@ -94,7 +94,7 @@ class ToDo(commands.Cog):
             floor_list = str(list(range(1, 101))).translate(NUMBER_TO_FULLWIDTH)
             if floor in floor_list:
                 floor += '層'
-            await ctx.send(f"{floor} は存在しないよ")
+            await ctx.send(f"```{floor} は存在しないよ```")
         else:
             todo = set_todo(floor)
             if len(floor) < 3:
@@ -109,7 +109,7 @@ class ToDo(commands.Cog):
         Args: 引数self, ctxは指定しない
 
         Example:
-            <prefix>寝れま１０！
+            <prefix>寝れま１０！: $寝れま１０！
 
         Memo:
             ctx (object): discord.ext.commands.context.Context object
@@ -119,6 +119,24 @@ class ToDo(commands.Cog):
         greet = f"乙カレー  {ctx.author.name}！\n"
         await ctx.send(f"```{greet}今日のノルマ：{quota}\nファイト！```")
 
+    @commands.command(name='ギルイベ')
+    async def quota(self, ctx, guild=None):
+        """ギルイベの日程・招き猫ギルドの予定を表示する
+
+        Args: 引数self, ctxは指定しない
+            guild (str): ギルド名（デフォルト: None）
+
+        Example: 空白は全角でも半角でもOK！
+            <prefix>ギルイベ: $ギルイベ
+            <prefix>ギルイベ <guild>: $ギルイベ　招き猫
+
+        Memo:
+            ctx (object): discord.ext.commands.context.Context object
+        """
+        # quantity = random.randint(1, 10)
+        # quota = set_task(quantity) + "するまで寝れま１０！"
+        # greet = f"乙カレー  {ctx.author.name}！\n"
+        # await ctx.send(f"```{greet}今日のノルマ：{quota}\nファイト！```")
 
 # Botの起動とDiscordサーバーへの接続（このファイルが実行されたとき）
 # if __name__ == '__main__':

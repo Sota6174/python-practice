@@ -9,3 +9,5 @@ CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 PUBLIC_KYE = os.getenv('PUBLIC_KYE')
 TOKEN = os.getenv('TOKEN')
 TEXT_CHANNEL_ID = os.getenv('TEXT_CHANNEL_ID')
+
+CORONA_URL = os.getenv('CORONA_URL')

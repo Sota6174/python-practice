@@ -26,7 +26,7 @@ BIRTHDAY_dict = {
 
 
 class Birthday(commands.Cog):
-    """キャラの誕生日を表示するbirthdayコマンドを実装するクラス
+    """birthdayコマンドを実装するクラス
 
     Args:
         bot(class): commands.Bot()
@@ -62,7 +62,7 @@ class Birthday(commands.Cog):
         elif character_name in BIRTHDAY_dict:
             await ctx.send(f"```{BIRTHDAY_dict[character_name]}```")
         else:
-            await ctx.send(character_name + 'は未登録です\n')
+            await ctx.send(f"```{character_name}は未登録です\n```")
 
 
 # Botの起動とDiscordサーバーへの接続（このファイルが実行されたとき）

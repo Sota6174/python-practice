@@ -31,7 +31,15 @@
 
 ### test4.py
 - unicodedataを用いて、半角数字をkey、全角数字をvalueに持つ辞書を作成し、translate()メソッドを使用することで半角数字を全角数字に変換出来る
+- func1(), func2(), func3()で実行速度はほぼ変わらなかった
 - 参考：http://eneprog.blogspot.com/2018/09/pythonunicodedata.html
+
+### test5.py
+- スクレイピングでコロナの新規感染者数を取得
+- BeautifulSoup()でパーサ―は明示的に指定しないと自動で選択され、環境によっては違うパーサーが使用される可能性があるという警告が表示される->html.parserをしっかり指定する
+- 参考：https://lets-hack.tech/programming/languages/python/beautifulsoup/
+
+
 
 ### Discode Bot作業記録
 - [Issueのリンク](https://github.com/Sota6174/python-practice/issues/30)
