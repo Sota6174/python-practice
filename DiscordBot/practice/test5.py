@@ -34,5 +34,5 @@ print(corona_infected)
 # print(soup(class_='today'))
 # print(soup(class_='compare'))
 
-# updated_time = soup.find('p').text
-# print(updated_time)
+updated_time = soup.find('p').text
+print(updated_time)
