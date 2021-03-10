@@ -6,14 +6,14 @@ from search import Search
 from todo import ToDo
 from constants import TOKEN
 
-PREFIX = '$'
+# PREFIX = '$'
+PREFIX = '!'
 
 
 # Botの起動とDiscordサーバーへの接続（このファイルが実行されたとき）
 if __name__ == '__main__':
     bot = commands.Bot(
         command_prefix=PREFIX,
-        self_bot=True,
         help_command=JapaneseHelpCommand(prefix=PREFIX))
     bot.add_cog(Birthday(bot=bot))
     bot.add_cog(ToDo(bot=bot))

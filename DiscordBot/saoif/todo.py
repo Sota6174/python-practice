@@ -8,7 +8,7 @@ from discord.ext import commands
 PREFIX = '$'
 AREA_LIST = [
     '１', '２', '３', '４', '５', '６', '７', '８', '９', '１０',
-    '１１', '１２', '１３', '１４', '２０', '２５', '２７', '３５', '３７', '４０', '４７',
+    '１１', '１２', '１３', '１４', '２０', '２２', '２５', '２７', '３５', '３７', '４０', '４７',
     '掲示板', '黒鉄宮']
 TODO_LIST = ['熟練', 'ボス周回', 'ナンパ（ギルド勧誘）', '瓶集め', 'ポテチ食べる', '寝る！']
 TASK_LIST = [
@@ -22,13 +22,18 @@ NUMBER_TO_FULLWIDTH = dict((0x0030 + ch, 0xFF10 + ch) for ch in range(10))
 def set_todo(floor):
     if floor == '黒鉄宮':
         todo = '黒カオス周回'
+    elif floor == '２２':
+        todo = '釣り'
     else:
         todo = random.choice(TODO_LIST)
+
     return todo
 
 
 def set_task(quantity):
-    if quantity > 5:
+    if quantity == 11:
+        task = '釣り'
+    elif quantity > 5:
         task = TASK_LIST[random.randint(0, 4)]
     elif quantity > 1:
         task = TASK_LIST[random.randint(0, 8)]
@@ -36,7 +41,9 @@ def set_task(quantity):
         task = random.choice(TASK_LIST)
 
     quantity = AREA_LIST[quantity-1]
-    if task == 'mod開放の欠片Ⅲ':
+    if task == '釣り':
+        quota = f"{task}１００回"
+    elif task == 'mod開放の欠片Ⅲ':
         quota = f"{task}・{random.choice(WEAPON_LIST[:-1])}を{quantity}個ドロップ"
     elif task == '熟練':
         quota = f"{random.choice(WEAPON_LIST)}の{task}{quantity}up"
@@ -114,13 +121,13 @@ class ToDo(commands.Cog):
         Memo:
             ctx (object): discord.ext.commands.context.Context object
         """
-        quantity = random.randint(1, 10)
+        quantity = random.randint(1, 11)
         quota = set_task(quantity) + "するまで寝れま１０！"
         greet = f"乙カレー  {ctx.author.name}！\n"
         await ctx.send(f"```{greet}今日のノルマ：{quota}\nファイト！```")
 
     @commands.command(name='ギルイベ')
-    async def quota(self, ctx, guild=None):
+    async def guild_event(self, ctx, guild=None):
         """ギルイベの日程・招き猫ギルドの予定を表示する
 
         Args: 引数self, ctxは指定しない
@@ -133,10 +140,6 @@ class ToDo(commands.Cog):
         Memo:
             ctx (object): discord.ext.commands.context.Context object
         """
-        # quantity = random.randint(1, 10)
-        # quota = set_task(quantity) + "するまで寝れま１０！"
-        # greet = f"乙カレー  {ctx.author.name}！\n"
-        # await ctx.send(f"```{greet}今日のノルマ：{quota}\nファイト！```")
 
 # Botの起動とDiscordサーバーへの接続（このファイルが実行されたとき）
 # if __name__ == '__main__':
