@@ -4,89 +4,14 @@ from bs4 import BeautifulSoup as bs4
 
 # from japanese import JapaneseHelpCommand
 # from constants import TOKEN
-from constants import CORONA_URL
+from constants import CORONA_URL, GOOLAB_APP_ID, GOOLAB_URL
 
 # PREFIX = '$'
-PREFECTURE_DICT = {
-    '北海道': 'hokkaido',
-    '青森県': 'aomori',
-    '岩手県': 'iwate',
-    '宮城県': 'miyagi',
-    '秋田県': 'akita',
-    '山形県': 'yamagata',
-    '福島県': 'fukushima',
-    '茨城県': 'ibaraki',
-    '栃木県': 'tochigi',
-    '群馬県': 'gunma',
-    '埼玉県': 'saitama',
-    '千葉県': 'chiba',
-    '東京都': 'tokyo',
-    '神奈川県': 'kanagawa',
-    '新潟県': 'niigata',
-    '富山県': 'toyama',
-    '石川県': 'ishikawa',
-    '福井県': 'fukui',
-    '山梨県': 'yamanashi',
-    '長野県': 'nagano',
-    '岐阜県': 'gifu',
-    '静岡県': 'shizuoka',
-    '愛知県': 'aichi',
-    '三重県': 'mie',
-    '滋賀県': 'shiga',
-    '京都府': 'kyoto',
-    '大阪府': 'osaka',
-    '兵庫県': 'hyogo',
-    '奈良県': 'nara',
-    '和歌山県': 'wakayama',
-    '鳥取県': 'tottori',
-    '島根県': 'shimane',
-    '岡山県': 'okayama',
-    '広島県': 'hiroshima',
-    '山口県': 'yamaguchi',
-    '徳島県': 'tokushima',
-    '香川県': 'kagawa',
-    '愛媛県': 'ehime',
-    '高知県': 'kochi',
-    '福岡県': 'fukuoka',
-    '佐賀県': 'saga',
-    '長崎県': 'nagasaki',
-    '熊本県': 'kumamoto',
-    '大分県': 'oita',
-    '宮崎県': 'miyazaki',
-    '鹿児島県': 'kagoshima',
-    '沖縄県': 'okinawa',
-}
 
 
-def remove_empty(a: list):
-    return list(filter(None, a))
+# def remove_empty(a: list):
+#     return list(filter(None, a))
 
-
-def set_corona_message(value: str, data: list):
-    if len(data[0]) == 3:
-        if value == '感染者数':
-            msg = f"感染者数：\n\t累計 {data[0][0]}人\n\t{data[0][1]}人\n\t{data[0][2]}人\n"
-        elif value == '回復者数':
-            msg = f"回復者数：\n\t累計 {data[1][0]}人\n\t{data[1][1]}人\n\t{data[1][2]}人\n"
-        elif value == '死亡者数':
-            msg = f"死亡者数：\n\t累計 {data[2][0]}人\n\t{data[2][1]}人\n\t{data[2][2]}人\n"
-        else:
-            msg = f"感染者数：\n\t累計 {data[0][0]}人\n\t{data[0][1]}人\n"
-            msg += f"回復者数：\n\t累計 {data[1][0]}人\n\t{data[1][1]}人\n"
-            msg += f"死亡者数：\n\t累計 {data[2][0]}人\n\t{data[2][1]}人\n"
-    else:
-        if value == '感染者数':
-            msg = f"感染者数：\n\t累計 {data[0][0]}人\n\t{data[0][1]}人\n"
-        elif value == '回復者数':
-            msg = f"回復者数：\n\t累計 {data[1][0]}人\n\t{data[1][1]}人\n"
-        elif value == '死亡者数':
-            msg = f"死亡者数：\n\t累計 {data[2][0]}人\n\t{data[2][1]}人\n"
-        else:
-            msg = f"感染者数：\n\t累計 {data[0][0]}人\n\t{data[0][1]}人\n"
-            msg += f"回復者数：\n\t累計 {data[1][0]}人\n\t{data[1][1]}人\n"
-            msg += f"死亡者数：\n\t累計 {data[2][0]}人\n\t{data[2][1]}人\n"
-
-    return msg
 
 # bot = commands.Bot(
 #         command_prefix=PREFIX,
@@ -109,6 +34,80 @@ class Search(commands.Cog):
         super().__init__()
         self.bot = bot
         self.prefix = prefix
+        self.prefecture_dict = {
+            '北海道': 'hokkaido',
+            '青森県': 'aomori',
+            '岩手県': 'iwate',
+            '宮城県': 'miyagi',
+            '秋田県': 'akita',
+            '山形県': 'yamagata',
+            '福島県': 'fukushima',
+            '茨城県': 'ibaraki',
+            '栃木県': 'tochigi',
+            '群馬県': 'gunma',
+            '埼玉県': 'saitama',
+            '千葉県': 'chiba',
+            '東京都': 'tokyo',
+            '神奈川県': 'kanagawa',
+            '新潟県': 'niigata',
+            '富山県': 'toyama',
+            '石川県': 'ishikawa',
+            '福井県': 'fukui',
+            '山梨県': 'yamanashi',
+            '長野県': 'nagano',
+            '岐阜県': 'gifu',
+            '静岡県': 'shizuoka',
+            '愛知県': 'aichi',
+            '三重県': 'mie',
+            '滋賀県': 'shiga',
+            '京都府': 'kyoto',
+            '大阪府': 'osaka',
+            '兵庫県': 'hyogo',
+            '奈良県': 'nara',
+            '和歌山県': 'wakayama',
+            '鳥取県': 'tottori',
+            '島根県': 'shimane',
+            '岡山県': 'okayama',
+            '広島県': 'hiroshima',
+            '山口県': 'yamaguchi',
+            '徳島県': 'tokushima',
+            '香川県': 'kagawa',
+            '愛媛県': 'ehime',
+            '高知県': 'kochi',
+            '福岡県': 'fukuoka',
+            '佐賀県': 'saga',
+            '長崎県': 'nagasaki',
+            '熊本県': 'kumamoto',
+            '大分県': 'oita',
+            '宮崎県': 'miyazaki',
+            '鹿児島県': 'kagoshima',
+            '沖縄県': 'okinawa',
+        }
+
+    def set_corona_message(self, value: str, data: list):
+        if len(data[0]) == 3:
+            if value == '感染者数':
+                msg = f"感染者数：\n\t累計 {data[0][0]}名\n\t{data[0][1]}名\n\t{data[0][2]}名\n"
+            elif value == '回復者数':
+                msg = f"回復者数：\n\t累計 {data[1][0]}名\n\t{data[1][1]}名\n\t{data[1][2]}名\n"
+            elif value == '死亡者数':
+                msg = f"死亡者数：\n\t累計 {data[2][0]}名\n\t{data[2][1]}名\n\t{data[2][2]}名\n"
+            else:
+                msg = f"感染者数：\n\t累計 {data[0][0]}名\n\t{data[0][1]}名\n"
+                msg += f"回復者数：\n\t累計 {data[1][0]}名\n\t{data[1][1]}名\n"
+                msg += f"死亡者数：\n\t累計 {data[2][0]}名\n\t{data[2][1]}名\n"
+        else:
+            if value == '感染者数':
+                msg = f"感染者数：\n\t累計 {data[0][0]}名\n\t{data[0][1]}名\n"
+            elif value == '回復者数':
+                msg = f"回復者数：\n\t累計 {data[1][0]}名\n\t{data[1][1]}名\n"
+            elif value == '死亡者数':
+                msg = f"死亡者数：\n\t累計 {data[2][0]}名\n\t{data[2][1]}名\n"
+            else:
+                msg = f"感染者数：\n\t累計 {data[0][0]}名\n\t{data[0][1]}名\n"
+                msg += f"回復者数：\n\t累計 {data[1][0]}名\n\t{data[1][1]}名\n"
+                msg += f"死亡者数：\n\t累計 {data[2][0]}名\n\t{data[2][1]}名\n"
+        return msg
 
     @commands.command()
     async def corona(self, ctx, prefecture=None, value='all'):
@@ -127,21 +126,21 @@ class Search(commands.Cog):
         Memo:
             ctx (object): discord.ext.commands.context.Context object
         """
-        if prefecture in PREFECTURE_DICT:
+        if prefecture in self.prefecture_dict:
             # 日本語でkeyに存在する
-            prefecture = PREFECTURE_DICT[prefecture]
+            prefecture = self.prefecture_dict[prefecture]
 
-        if prefecture in PREFECTURE_DICT.values():
+        if prefecture in self.prefecture_dict.values():
             # アルファベットでvalueに存在する
             # 情報を取得し、送信する
             html = requests.get(CORONA_URL + prefecture)
             soup = bs4(html.content, 'html.parser')
             updated_time = soup.find('p').text.replace('更新時間', '更新日時')
             data = [tag.text.splitlines() for tag in soup(class_='dialog')]
-            data = list(map(remove_empty, data))
-            prefecture = [k for k, v in PREFECTURE_DICT.items() if v == prefecture][0]
+            data = list(map(lambda a: list(filter(None, a)), data))
+            prefecture = [k for k, v in self.prefecture_dict.items() if v == prefecture][0]
             msg = f"<{prefecture}のコロナ状況>\n\n{updated_time}\n\n"
-            msg += set_corona_message(value, data)
+            msg += self.set_corona_message(value, data)
             await ctx.send(f"```{msg}```")
         elif prefecture is None:
             # 引数prefectureが入力されていない
@@ -149,6 +148,37 @@ class Search(commands.Cog):
         else:
             await ctx.send(f"```{prefecture} は存在しないよ```")
 
+    @commands.command(name='平仮名')
+    async def hiragana(self, ctx, *text):
+        """漢字の熟語や漢字の混ざった文章を平仮名で表示する
+
+        Args: 引数self, ctxは指定しない
+            text (str): 漢字の熟語や漢字の混ざった文章
+
+        Example: textに空白が入ってもアルファベットでもOK！
+            <prefix>平仮名 <text>: $平仮名　甚振る
+            <prefix>平仮名 <text>: $平仮名　甚振る　聊か　稚い
+
+        Memo:
+            ctx (object): discord.ext.commands.context.Context object
+            アルファベットが入力された時は一文字ずつ読んで平仮名で表示されるだけ
+                例：「python」->「ぴーわいてぃーえっちおーえぬ」
+        """
+        if len(text) == 0:
+            text = ''
+            text_hiragana = 'くうはく'
+        else:
+            text = '　'.join(text)
+            data = {
+                'app_id': GOOLAB_APP_ID,
+                'request_id': 'hiragana0001',
+                'sentence': text,
+                'output_type': 'hiragana'
+            }
+            response = requests.post(GOOLAB_URL, data=data).json()
+            text_hiragana = response['converted']
+        msg = f"「{text}」はね、「{text_hiragana}」と読むんだよ！賢くなったね！"
+        await ctx.send(f"```{msg}```")
 
 # Botの起動とDiscordサーバーへの接続（このファイルが実行されたとき）
 # if __name__ == '__main__':

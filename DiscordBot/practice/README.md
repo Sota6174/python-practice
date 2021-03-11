@@ -39,6 +39,12 @@
 - BeautifulSoup()でパーサ―は明示的に指定しないと自動で選択され、環境によっては違うパーサーが使用される可能性があるという警告が表示される->html.parserをしっかり指定する
 - 参考：https://lets-hack.tech/programming/languages/python/beautifulsoup/
 
+### test6.py
+- [gooラボのひらがな化API](https://labs.goo.ne.jp/api/jp/hiragana-translation/)を使用して、入力された漢字をひらがなに変換する
+- ひらがなを漢字にするのは候補が多く出てきたりして難しかった（自然言語処理が必要そう）
+
+### test7.py
+- [discord.pyのリファレンス](https://discordpy.readthedocs.io/en/stable/ext/commands/cogs.html)のCogに関する説明ページに乗ってるサンプルコードから引用
 
 
 ### Discode Bot作業記録
