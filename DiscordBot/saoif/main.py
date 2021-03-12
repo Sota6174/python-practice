@@ -14,7 +14,8 @@ PREFIX = '!'
 
 # Botの起動とDiscordサーバーへの接続（このファイルが実行されたとき）
 if __name__ == '__main__':
-    intents = discord.Intents.all()     # すべてTrueのIntentsオブジェクトを生成
+    # intents = discord.Intents.all()     # すべてTrueのIntentsオブジェクトを生成
+    intents = discord.Intents.default()     # デフォルトのIntentsオブジェクトを生成
     intents.typing = False              # typingを受け取らないように設定
     bot = commands.Bot(
         command_prefix=PREFIX,

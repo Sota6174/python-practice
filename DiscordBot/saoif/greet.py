@@ -6,8 +6,8 @@ from constants import TOKEN
 
 PREFIX = '$'
 
-intents = discord.Intents.all()     # すべてTrueのIntentsオブジェクトを生成
-intents.typing = False              # typingを受け取らないように設定
+intents = discord.Intents.default()     # デフォルトのIntentsオブジェクトを生成
+intents.typing = False                  # typingを受け取らないように設定
 bot = commands.Bot(
     command_prefix=PREFIX,
     help_command=JapaneseHelpCommand(prefix=PREFIX),
@@ -90,8 +90,8 @@ class Greet(commands.Cog):
             メッセージは最後に書く
             メッセージに空白を入れたい場合はメッセージを半角の'(シングルクォーテーション)か"(ダブルクォーテーション)で囲む
         """
-        # member_taple = args[:-1]
-        # message = args[-1]
+        member_taple = args[:-1]
+        message = args[-1]
         # print(list(self.bot.get_all_members()))
         # for member in member_taple:
         #     if member == 
