@@ -1,3 +1,5 @@
+import re
+
 import discord
 from discord.ext import commands
 
@@ -8,6 +10,7 @@ PREFIX = '$'
 
 intents = discord.Intents.default()     # デフォルトのIntentsオブジェクトを生成
 intents.typing = False                  # typingを受け取らないように設定
+intents.members = True
 bot = commands.Bot(
     command_prefix=PREFIX,
     help_command=JapaneseHelpCommand(prefix=PREFIX),
@@ -28,6 +31,8 @@ class Greet(commands.Cog):
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
+        self.members_info = {}
+        self.member_count = 0
 
     @commands.command()
     async def hello(self, ctx):
@@ -72,6 +77,17 @@ class Greet(commands.Cog):
             msg = f"ギルド招き猫にようこそ！{member.mention} さん！"
             await channel.send(f"```{msg}```")
 
+    @commands.command(aliases=['member_list', 'メンバー一覧'])
+    async def get_member_list(self, ctx):
+        if self.member_count < int(ctx.guild.member_count):
+            # print(ctx.guild.members[0])
+            # print(ctx.guild.members[1])
+            print(ctx.guild.members)
+            # id_list = [re.search('Member id=(.+?) ', s).group(0) for s in str(ctx.guild.members)]
+            # print(id_list)
+            # self.members_info = 
+            self.member_count = int(ctx.guild.member_count)
+
     @commands.command(name='summon')
     async def summon_member(self, ctx, *args):
         """指定された人全員にメンション付きのメッセージを送る
@@ -92,19 +108,17 @@ class Greet(commands.Cog):
         """
         member_taple = args[:-1]
         message = args[-1]
-        # print(list(self.bot.get_all_members()))
         # for member in member_taple:
         #     if member == 
 
-    # @commands.Cog.listener()
-    # async def on_voice_state_update(self):
-    #     """VCに人が出入りしたときに挨拶を表示する
+        # @commands.Cog.listener()
+        # async def on_voice_state_update(self):
+        #     """VCに人が出入りしたときに挨拶を表示する
 
-    #     Memo:
-    #         ctx (object): discord.ext.commands.context.Context object
-    #         VCに人が出入りしたときにこのイベントハンドラが呼ばれる
-    #     """
-
+        #     Memo:
+        #         ctx (object): discord.ext.commands.context.Context object
+        #         VCに人が出入りしたときにこのイベントハンドラが呼ばれる
+        #     """
 
 # Botの起動とDiscordサーバーへの接続（このファイルが実行されたとき）
 if __name__ == '__main__':
