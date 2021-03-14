@@ -31,8 +31,17 @@ class Greet(commands.Cog):
     def __init__(self, bot):
         super().__init__()
         self.bot = bot
-        self.members_info = {}
+        self.member_list = []
         self.member_count = 0
+
+    def set_member_list(self, ctx):
+        if self.member_count < int(ctx.guild.member_count):
+            print(self.bot..member.name)
+            print(ctx.member.id)
+            print(ctx.member.bot)
+            print(ctx.member.nick)
+            self.member_list = [str(i) for i in ctx.guild.members]
+            self.member_count = int(ctx.guild.member_count)
 
     @commands.command()
     async def hello(self, ctx):
@@ -77,18 +86,7 @@ class Greet(commands.Cog):
             msg = f"ギルド招き猫にようこそ！{member.mention} さん！"
             await channel.send(f"```{msg}```")
 
-    @commands.command(aliases=['member_list', 'メンバー一覧'])
-    async def get_member_list(self, ctx):
-        if self.member_count < int(ctx.guild.member_count):
-            # print(ctx.guild.members[0])
-            # print(ctx.guild.members[1])
-            print(ctx.guild.members)
-            # id_list = [re.search('Member id=(.+?) ', s).group(0) for s in str(ctx.guild.members)]
-            # print(id_list)
-            # self.members_info = 
-            self.member_count = int(ctx.guild.member_count)
-
-    @commands.command(name='summon')
+    @commands.command(aliases=['summon', '召喚', 'call', '呼び出し'])
     async def summon_member(self, ctx, *args):
         """指定された人全員にメンション付きのメッセージを送る
 
@@ -101,15 +99,16 @@ class Greet(commands.Cog):
             <prefix>summon <args>: $summon マイン Lucifer "ディスコ　来て！"
 
         Memo:
+            コマンドは'summon'以外にも'summon_member', '召喚', 'call', '呼び出し'が使える
             ctx (object): discord.ext.commands.context.Context object
             メンバー名、メッセージ名同士の間は空白を空ける（全角・半角OK！）
             メッセージは最後に書く
             メッセージに空白を入れたい場合はメッセージを半角の'(シングルクォーテーション)か"(ダブルクォーテーション)で囲む
         """
+        self.set_member_list(ctx)
         member_taple = args[:-1]
         message = args[-1]
-        # for member in member_taple:
-        #     if member == 
+
 
         # @commands.Cog.listener()
         # async def on_voice_state_update(self):
